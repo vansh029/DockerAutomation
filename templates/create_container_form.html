@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Container</title>
+    <!-- Your existing styles and scripts here -->
+</head>
+<body>
+    <h1>Create Container from Image</h1>
+
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message, category in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/create_container">
+        <label for="image_id">Image ID:</label><br>  
+        <input type="text" id="image_id" name="image_id" required><br>
+        <input type="submit" value="Create Container">
+    </form>
+</body>
+</html>

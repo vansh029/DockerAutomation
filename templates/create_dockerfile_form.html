@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Dockerfile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .flash-messages {
+            margin-top: 10px;
+        }
+
+        .flash-message {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Dockerfile</h1>
+
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for message, category in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/generate_dockerfile">
+        <label for="image_name">Base Image Name:</label><br>
+        <input type="text" id="image_name" name="image_name" required><br>
+        <label for="workdir">Working Directory:</label><br>
+        <input type="text" id="workdir" name="workdir"><br>
+        <label for="cmd">CMD:</label><br>
+        <input type="text" id="cmd" name="cmd"><br>
+        <label for="entrypoint">Entrypoint:</label><br>
+        <input type="text" id="entrypoint" name="entrypoint"><br>
+        <label for="env">Environment Variables (key=value,key2=value2):</label><br>
+        <input type="text" id="env" name="env"><br>
+        <label for="copy">Copy files or directories (source destination):</label><br>
+        <input type="text" id="copy" name="copy"><br>
+        <label for="expose">Expose Ports (comma-separated):</label><br>
+        <input type="text" id="expose" name="expose"><br>
+        <input type="submit" value="Generate Dockerfile">
+    </form>
+</body>
+</html>
